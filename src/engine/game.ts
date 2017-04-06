@@ -58,3 +58,4 @@ export abstract class Game {
         wrapper.appendChild(this.canvasElement);
     }
 }
+
