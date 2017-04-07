@@ -8,8 +8,8 @@ export class State {
         public gameContext: GameContext
     ) { }
 
-    public update() { };
-    public render() { };
+    public update(dt: number = 1) { };
+    public render(it: number = 0) { };
     public onEnter() { };
     public onExit() { };
 

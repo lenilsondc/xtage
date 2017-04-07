@@ -1,6 +1,7 @@
 import {StateList} from './state-list';
 import {StateStack} from './state-stack';
 import {GameContext} from './game-context';
+import {Looper} from './looper';
 
 export abstract class Game {
     // Canvas to draw on
@@ -8,6 +9,7 @@ export abstract class Game {
     public canvas_height: number = 800;
     public canvasElement: HTMLCanvasElement = null;
     public canvas: CanvasRenderingContext2D = null;
+    public looper: Looper;
 
     public gameContext: GameContext;
 
@@ -23,27 +25,44 @@ export abstract class Game {
         this.timer = 1000 / this.FPS;
 
         this.gameContext = new GameContext(this);
+
+        this.looper = new Looper(this.update.bind(this), this.draw.bind(this));
         this.startGame();
+
     }
 
-    private update() {
-        this.stateStack.update();
-        this.stateStack.render();
+    private update(dt: number = 1) {
+        this.stateStack.update(dt);
     }
 
-    public onStart() {}
+    private draw(it: number = 0) {
+        this.stateStack.render(it);
+        this.gameContext.canvas.fillStyle = 'white';
+        this.gameContext.canvas.font = '10px Courier';
+        this.gameContext.canvas.fillText(`ratio: ${it}`, 5, 10);
+        this.gameContext.canvas.fillText(`fps  : ${this.looper.fps} fps`, 5, 20);
+        this.gameContext.canvas.fillText(`delta: ${this.looper.delta} ms`, 5, 30);
+        this.gameContext.canvas.fillText(`fps0 : ${this.looper.framesThisSecond} f`, 5, 40);
+        this.gameContext.canvas.fillText(`step : ${this.looper.timestep} ms`, 5, 50);
+    }
+
+    public onStart() { }
 
     public startGame() {
-        if(this.onStart) this.onStart();
-        this.timerID = setInterval(this.update.bind(this), this.timer);
+
+        if (this.onStart)
+            this.onStart();
+
+        this.looper.start();
+        //this.timerID = setInterval(this.update.bind(this), this.timer);
     }
 
     private pauseGame() {
-        clearInterval(this.timerID);
+       //clearInterval(this.timerID);
     }
 
     private resumeGame() {
-        this.timerID = setInterval(this.update.bind(this), this.timer);
+        //this.timerID = setInterval(this.update.bind(this), this.timer);
     }
 
     /**

@@ -9,17 +9,17 @@ export class StateStack {
         this.states = new StateList()
     }
 
-    public update() {
+    public update(dt: number = 1) {
         let state = this.states.top();
         if (state) {
-            state.update();
+            state.update(dt);
         }
     }
 
-    public render() {
+    public render(it: number = 0) {
         let state = this.states.top();
         if (state) {
-            state.render();
+            state.render(it);
         }
     }
 
