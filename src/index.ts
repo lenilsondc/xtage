@@ -1,6 +1,7 @@
-import {State} from './engine/state';
-import {Game} from './engine/game';
-import {MainMenuState} from './states/main-menu.state';
+import { State } from './engine/state';
+import { Game } from './engine/game';
+import { MainMenuState } from './states/main-menu.state';
+import { GameState } from './states/game.state';
 
 class MyGame extends Game {
 
@@ -9,7 +10,7 @@ class MyGame extends Game {
     }
 
     onStart() {
-        this.stateStack.push(new MainMenuState(this.gameContext));
+        this.stateStack.push(new GameState(this.gameContext));
     }
 }
 

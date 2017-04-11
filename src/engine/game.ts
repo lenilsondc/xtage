@@ -36,6 +36,7 @@ export abstract class Game {
     }
 
     private draw(it: number = 0) {
+        this.gameContext.canvas.clearRect(0, 0, this.gameContext.dimensions.width, this.gameContext.dimensions.height)
         this.stateStack.render(it);
         this.gameContext.canvas.fillStyle = 'white';
         this.gameContext.canvas.font = '10px Courier';

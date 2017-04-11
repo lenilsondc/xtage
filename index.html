@@ -4,6 +4,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>State Game</title>
+    <style>
+        #main_window canvas{
+            border: 1px solid gray;
+        }
+    </style>
 </head>
 
 <body>
@@ -20,7 +25,7 @@
                 src: {
                     defaultExtension: 'ts'
                 }
-            } 
+            }
         });
         System
             .import('./src/index.ts')

@@ -84,7 +84,7 @@ export class MainMenuState extends State {
 
     public render(it) {
         // redraw
-        this.gameContext.canvas.clearRect(0, 0, this.gameContext.dimensions.width, this.gameContext.dimensions.height)
+        
         this.gameContext.canvas.beginPath();
         this.gameContext.canvas.fillStyle = this.backgroundColor;
         //this.gameContext.canvas.fillColor = this.backgroundColor;
