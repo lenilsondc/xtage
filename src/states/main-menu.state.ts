@@ -1,14 +1,14 @@
-import {GameContext} from '../engine/game-context';
-import {State} from '../engine/state';
-import {GameState} from './game.state';
+import { GameContext } from '../engine/game-context';
+import { State } from '../engine/state';
+import { GameState } from './game.state';
 
 
 export class MainMenuState extends State {
-    public name: String = 'MainMenuState';
+    public name: string = 'MainMenuState';
 
-    private backgroundColor: String = '#000';
+    private backgroundColor: string = '#000';
     private textColor = 'rgb(0,0,0)'; // Starts with black
-    private colorsArray: String[] = []; // our fade values
+    private colorsArray: string[] = []; // our fade values
     private colorIndex = 0;
     private y = 0;
     private y0 = 0;
@@ -53,7 +53,7 @@ export class MainMenuState extends State {
         // clear the keydown event
         window.onkeydown = null;
     };
-    
+
     angleSpeed = 0.001;
     angle = 0;
 
@@ -65,11 +65,11 @@ export class MainMenuState extends State {
         this.textColor = `rgb(${this.colorsArray[this.colorIndex]}, ${this.colorsArray[this.colorIndex]}, ${this.colorsArray[this.colorIndex]})`;
         this.colorIndex++;
 
-        if(this.x < 0 || this.x + this.textMeasure.width >= this.gameContext.dimensions.width){
+        if (this.x < 0 || this.x + this.textMeasure.width >= this.gameContext.dimensions.width) {
             this.vx = -this.vx;
         }
 
-        if(this.y < 0 || this.y + this.textMeasure.height >= this.gameContext.dimensions.height){
+        if (this.y < 0 || this.y + this.textMeasure.height >= this.gameContext.dimensions.height) {
             this.vy = -this.vy;
         }
 
@@ -78,8 +78,8 @@ export class MainMenuState extends State {
         this.y0 = this.y;
         //this.y = 100 + 50*Math.sin(this.angle);
 
-        this.x += this.vx*dt;
-        this.y += this.vy*dt;
+        this.x += this.vx * dt;
+        this.y += this.vy * dt;
     }
 
     public render(it) {
@@ -91,6 +91,6 @@ export class MainMenuState extends State {
         this.gameContext.canvas.fillRect(0, 0, this.gameContext.dimensions.width, this.gameContext.dimensions.height);
         this.gameContext.canvas.fillStyle = 'white';//this.textColor;
         this.gameContext.canvas.font = '24pt Courier';
-        this.gameContext.canvas.fillText('Press ENTER to start!', this.x + (this.x - this.x0)*it, this.y + (this.y - this.y0)*it );
+        this.gameContext.canvas.fillText('Press ENTER to start!', this.x + (this.x - this.x0) * it, this.y + (this.y - this.y0) * it);
     }
 }
